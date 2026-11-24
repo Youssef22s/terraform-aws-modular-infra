@@ -15,3 +15,15 @@ resource "aws_key_pair" "ec2_key" {
 
   tags = local.common_tags
 }
+
+module "network" {
+  source               = "./modules/network"
+  vpc_cidr             = var.vpc_cidr
+  public_subnets_cidr  = var.public_subnets_cidr
+  private_subnets_cidr = var.private_subnets_cidr
+  azs                  = var.availability_zones
+  env                  = local.env
+
+  common_tags = local.common_tags
+}
+
