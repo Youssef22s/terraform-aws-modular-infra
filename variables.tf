@@ -44,4 +44,9 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
+variable "instance_type" {
+  description = "EC2 instance type for the web server"
+  type        = string
+  default     = "t2.micro"
+}
 

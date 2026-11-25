@@ -17,3 +17,18 @@ output "public_subnet_ids" {
   description = "Public Subnet IDs created by network module"
   value       = module.network.public_subnet_ids
 }
+
+output "ec2_public_ip" {
+  description = "Public IP of the Nginx web server"
+  value       = module.compute.public_ip
+}
+
+output "web_server_url" {
+  description = "Direct URL to access the Nginx server"
+  value       = "http://${module.compute.public_ip}"
+}
+
+output "ssh_connection_command" {
+  description = "Ready-to-use SSH command to connect to the EC2 instance"
+  value       = "ssh -i ${local.env}-private-key.pem ubuntu@${module.compute.public_ip}"
+}

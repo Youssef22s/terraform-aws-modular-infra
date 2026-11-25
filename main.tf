@@ -27,3 +27,19 @@ module "network" {
   common_tags = local.common_tags
 }
 
+module "security" {
+  source      = "./modules/security"
+  vpc_id      = module.network.vpc_id
+  env         = local.env
+  common_tags = local.common_tags
+}
+
+module "compute" {
+  source        = "./modules/compute"
+  instance_type = var.instance_type
+  subnet_id     = module.network.public_subnet_ids[0]
+  sg_id         = module.security.sg_id
+  key_name      = aws_key_pair.ec2_key.key_name
+  env           = local.env
+  common_tags   = local.common_tags
+}
