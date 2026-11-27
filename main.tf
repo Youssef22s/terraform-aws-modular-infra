@@ -36,7 +36,7 @@ module "security" {
 
 module "compute" {
   source        = "./modules/compute"
-  instance_type = var.instance_type
+  instance_type = local.selected_instance_type
   subnet_id     = module.network.public_subnet_ids[0]
   sg_id         = module.security.sg_id
   key_name      = aws_key_pair.ec2_key.key_name
